@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 1. springmvc test 1 -->
+    <!--<mvc:annotation-driven></mvc:annotation-driven>-->
+    <!--<context:component-scan base-package="com.example.helloweb.springmvc"></context:component-scan>-->
+
+    <!-- 2. springmvc test 2 -->
+    <!--处理器映射器: 将bean的name作为url进行查找，需要在配置Handler时指定beanname(就是url) -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
+    <!--处理器适配器
+        所有处理器适配器都实现HandlerAdapter接口，框架将会根据这个接口判断它是不是一个适配器
+    -->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
+    <!--视图解析器
+            需要配置解析jsp的视图解析器,默认使用jstl标签，classpath下面要由jstl的包
+        -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <!--配置Handler-->
+    <bean name="/product_input.action" class="com.example.helloweb.springmvc2.MyInputHandler"></bean>
+    <bean name="/product_save.action" class="com.example.helloweb.springmvc2.MySaveHandler"></bean>
+
+</beans>
